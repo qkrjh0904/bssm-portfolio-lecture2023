@@ -4,10 +4,15 @@ import com.bssm.portfolio.domain.portfolio.model.rq.PortfolioDeleteRq
 import com.bssm.portfolio.domain.portfolio.model.rq.PortfolioSaveRq
 import com.bssm.portfolio.domain.portfolio.model.rq.PortfolioUpdateRq
 import com.bssm.portfolio.global.ApiPath
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class PortfolioController {
+class PortfolioWriteController {
 
     @PostMapping(ApiPath.PORTFOLIO_V1)
     fun savePortfolio(
@@ -18,17 +23,17 @@ class PortfolioController {
 
     @PutMapping(ApiPath.PORTFOLIO_V1_ID)
     fun updatePortfolio(
-        @PathVariable id: Long,
+        @PathVariable(value = "id") portfolioId: Long,
         @RequestBody rq: PortfolioUpdateRq,
     ): Long {
-        return id
+        return portfolioId
     }
 
     @DeleteMapping(ApiPath.PORTFOLIO_V1_ID)
     fun deletePortfolio(
-        @PathVariable id: Long,
+        @PathVariable(value = "id") portfolioId: Long,
         @RequestBody rq: PortfolioDeleteRq,
     ): Long {
-        return id
+        return portfolioId
     }
 }

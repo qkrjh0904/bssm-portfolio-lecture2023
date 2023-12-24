@@ -11,7 +11,7 @@ Content-Type: application/json
     "webUrl": "포트폴리오 웹 주소",
     "gitUrl": "포트폴리오 깃헙 주소",
     "protectType": "PUBLIC",
-    "userId": [2,3],
+    "contributorIdList": [2,3],
     "videoUid": "영상 UID",
     "thumbnailUid": "썸네일 UID",
     "createdBy": 1
@@ -29,7 +29,7 @@ Content-Type: application/json
     "webUrl": "포트폴리오 웹 주소",
     "gitUrl": "포트폴리오 깃헙 주소",
     "protectType": "PUBLIC",
-    "userId": [2,3],
+    "contributorIdList": [2,3],
     "updatedBy": 1
 }
 
@@ -40,3 +40,9 @@ Content-Type: application/json
 {
     "createdBy": 1
 }
+
+### 포트폴리오 상세 조회
+GET /localhost:8080/portfolio/v1/1
+
+### 포트폴리오 목록 조회
+GET /localhost:8080/portfolio/v1?page=0&size=10&title=호어&theme=WEB&protectType=PUBLIC&name=이름

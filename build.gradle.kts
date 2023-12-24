@@ -7,6 +7,10 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "11.4.0"
     kotlin("jvm") version "1.9.22"
     kotlin("kapt") version "1.8.22"
+    kotlin("plugin.spring") version "1.8.0"
+    kotlin("plugin.jpa") version "1.8.0"
+    kotlin("plugin.allopen") version "1.3.71"
+    kotlin("plugin.noarg") version "1.3.71"
 }
 
 group = "com.bssm"
