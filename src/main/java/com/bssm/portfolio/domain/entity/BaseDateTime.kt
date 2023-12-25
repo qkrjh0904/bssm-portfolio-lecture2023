@@ -1,4 +1,4 @@
-package com.bssm.portfolio.db.entity
+package com.bssm.portfolio.domain.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.EntityListeners
@@ -17,6 +17,6 @@ abstract class BaseDateTime {
 
     @LastModifiedDate
     @Column(nullable = false)
-    var updatedDateTime: LocalDateTime? = null
-        private set
+    var updatedDateTime: LocalDateTime = LocalDateTime.now()
+        protected set
 }

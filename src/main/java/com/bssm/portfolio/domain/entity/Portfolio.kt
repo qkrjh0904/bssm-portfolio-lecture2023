@@ -1,10 +1,7 @@
-package com.bssm.portfolio.db.entity.portfolio
+package com.bssm.portfolio.domain.entity
 
-import com.bssm.portfolio.db.entity.BaseDateTime
-import com.bssm.portfolio.db.entity.attachfile.AttachFile
-import com.bssm.portfolio.db.entity.member.Member
-import com.bssm.portfolio.db.enums.PortfolioProtectType
-import com.bssm.portfolio.db.enums.PortfolioTheme
+import com.bssm.portfolio.domain.enums.PortfolioProtectType
+import com.bssm.portfolio.domain.enums.PortfolioTheme
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -20,21 +17,21 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 
 @Entity
-class Portfolio(
+class Portfolio private constructor(
     title: String,
     description: String,
     theme: PortfolioTheme,
     webUrl: String,
     gitUrl: String,
     protectType: PortfolioProtectType,
-    videoAttachFile: AttachFile,
-    thumbnailAttachFile: AttachFile,
+    videoFile: AttachFile,
+    thumbnailFile: AttachFile,
     member: Member,
 ) : BaseDateTime() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0
+    val id: Long = 0L
 
     @Column(nullable = false)
     var title: String = title
@@ -55,20 +52,20 @@ class Portfolio(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-        name = "video_attach_file_id",
+        name = "video_file_id",
         nullable = false,
         foreignKey = ForeignKey(name = "FK_PORTFOLIO_VIDEO_ATTACH_FILE_ID")
     )
-    var videoAttachFile: AttachFile = videoAttachFile
+    var videoFile: AttachFile = videoFile
         private set
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-        name = "thumbnail_attach_file_id",
+        name = "thumbnail_file_id",
         nullable = false,
         foreignKey = ForeignKey(name = "FK_PORTFOLIO_THUMBNAIL_ATTACH_FILE_ID")
     )
-    var thumbnailAttachFile: AttachFile = thumbnailAttachFile
+    var thumbnailFile: AttachFile = thumbnailFile
         private set
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -82,4 +79,35 @@ class Portfolio(
 
     @OneToMany(mappedBy = "portfolio", cascade = [CascadeType.ALL], orphanRemoval = true)
     var contributorList: List<PortfolioContributor> = mutableListOf()
+        protected set
+
+    @OneToMany(mappedBy = "portfolio", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var commentList: List<Comment> = mutableListOf()
+        protected set
+
+    companion object {
+        fun create(
+            title: String,
+            description: String,
+            theme: PortfolioTheme,
+            webUrl: String,
+            gitUrl: String,
+            protectType: PortfolioProtectType,
+            videoFile: AttachFile,
+            thumbnailFile: AttachFile,
+            member: Member,
+        ): Portfolio {
+            return Portfolio(
+                title = title,
+                description = description,
+                theme = theme,
+                webUrl = webUrl,
+                gitUrl = gitUrl,
+                protectType = protectType,
+                videoFile = videoFile,
+                thumbnailFile = thumbnailFile,
+                member = member,
+            )
+        }
+    }
 }

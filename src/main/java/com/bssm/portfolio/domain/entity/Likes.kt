@@ -1,7 +1,5 @@
-package com.bssm.portfolio.db.entity.portfolio
+package com.bssm.portfolio.domain.entity
 
-import com.bssm.portfolio.db.entity.BaseDateTime
-import com.bssm.portfolio.db.entity.member.Member
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.ForeignKey
@@ -12,30 +10,21 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 
 @Entity
-class PortfolioContributor(
+class Likes private constructor(
     portfolio: Portfolio,
     member: Member,
 ) : BaseDateTime() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0
+    val id: Long = 0L
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-        name = "portfolio_id",
-        nullable = false,
-        foreignKey = ForeignKey(name = "FK_PORTFOLIO_CONTRIBUTOR_PORTFOLIO_ID")
-    )
+    @JoinColumn(name = "portfolio_id", nullable = false, foreignKey = ForeignKey(name = "FK_LIKE_PORTFOLIO_ID"))
     var portfolio: Portfolio = portfolio
-        private set
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-        name = "member_id",
-        nullable = false,
-        foreignKey = ForeignKey(name = "FK_PORTFOLIO_CONTRIBUTOR_MEMBER_ID")
-    )
+    @JoinColumn(name = "member_id", nullable = false, foreignKey = ForeignKey(name = "FK_LIKE_MEMBER_ID"))
     var member: Member = member
-        private set
+        protected set
 }

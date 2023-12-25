@@ -1,6 +1,4 @@
 ### 포트폴리오 생성
-### - 필수 입력값 : 영상, 썸네일, 제목, 테마, 공개범위(공개, 비공개)
-### - 선택 입력값 : 웹 주소, 설명, 참여자 아이디, 깃헙 주소
 POST /localhost:8080/portfolio/v1
 Content-Type: application/json
 
@@ -11,14 +9,16 @@ Content-Type: application/json
     "webUrl": "포트폴리오 웹 주소",
     "gitUrl": "포트폴리오 깃헙 주소",
     "protectType": "PUBLIC",
-    "contributorIdList": [2,3],
+    "contributorIdList": [
+        2,
+        3
+    ],
     "videoUid": "영상 UID",
     "thumbnailUid": "썸네일 UID",
     "createdBy": 1
 }
 
 ### 포트폴리오 수정
-### 수정 범위 : 제목, 테마, 공개범위, 웹 주소, 설명, 참여자 아이디, 깃헙 주소
 PUT /localhost:8080/portfolio/v1/1
 Content-Type: application/json
 
@@ -29,7 +29,10 @@ Content-Type: application/json
     "webUrl": "포트폴리오 웹 주소",
     "gitUrl": "포트폴리오 깃헙 주소",
     "protectType": "PUBLIC",
-    "contributorIdList": [2,3],
+    "contributorIdList": [
+        2,
+        3
+    ],
     "updatedBy": 1
 }
 

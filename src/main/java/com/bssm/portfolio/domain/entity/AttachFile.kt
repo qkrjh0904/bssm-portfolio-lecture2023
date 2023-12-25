@@ -1,6 +1,5 @@
-package com.bssm.portfolio.db.entity.attachfile
+package com.bssm.portfolio.domain.entity
 
-import com.bssm.portfolio.db.entity.BaseDateTime
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -8,7 +7,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity
-class AttachFile(
+class AttachFile private constructor(
     fileUid: String,
     filePath: String,
     fileName: String,
@@ -17,7 +16,7 @@ class AttachFile(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0
+    val id: Long = 0L
 
     @Column(nullable = false)
     var fileUid: String = fileUid
@@ -30,4 +29,20 @@ class AttachFile(
 
     @Column(nullable = false)
     var fileSize: Long = fileSize
+
+    companion object {
+        fun create(
+            fileUid: String,
+            filePath: String,
+            fileName: String,
+            fileSize: Long,
+        ): AttachFile {
+            return AttachFile(
+                fileUid = fileUid,
+                filePath = filePath,
+                fileName = fileName,
+                fileSize = fileSize,
+            )
+        }
+    }
 }

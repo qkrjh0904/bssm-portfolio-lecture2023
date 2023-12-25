@@ -1,4 +1,4 @@
-package com.bssm.portfolio.db.enums
+package com.bssm.portfolio.domain.enums
 
 enum class PortfolioProtectType {
     PUBLIC,
